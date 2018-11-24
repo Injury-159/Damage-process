@@ -22,10 +22,19 @@
 	((WEAPON_UNARMED <= (%0) <= WEAPON_KATANA) || (WEAPON_DILDO <= (%0) <= WEAPON_CANE) || (%0) == WEAPON_PISTOLWHIP)	
 
 
+/* ————————————————————————————————————————————————————————————————
+
+STARTING
+
+———————————————————————————————————————————————————————————————— */	
+
 
 #if defined OnPlayerDamage
 	forward OnPlayerDamage(playerid, issuerid, &Float:amount, weapon, bodypart);
 #endif
+
+
+forward Float:GetPlayerWeaponDamage(playerid, weaponid); 	
 
 
 
@@ -743,7 +752,7 @@ stock SetPlayerWeaponDamage(playerid, weaponid, Float:amount)
 	    return 0;
 
 	if (!(-1 < weaponid < 54))
-	    return 0.0;
+	    return 0;
 
 
     DP_WeaponDamage[playerid][weaponid] = amount;
@@ -757,7 +766,7 @@ stock Float:GetPlayerWeaponDamage(playerid, weaponid)
 	    return 0;
 
 	if (!(-1 < weaponid < 54))
-	    return 0.0;
+	    return 0;
 
     return DP_WeaponDamage[playerid][weaponid];
 }
