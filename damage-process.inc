@@ -22,15 +22,15 @@
 	((WEAPON_UNARMED <= (%0) <= WEAPON_KATANA) || (WEAPON_DILDO <= (%0) <= WEAPON_CANE) || (%0) == WEAPON_PISTOLWHIP)	
 
 
-/* ————————————————————————————————————————————————————————————————
+/* â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”
 
 STARTING
 
-———————————————————————————————————————————————————————————————— */	
+â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€” */	
 
 
-#if defined OnPlayerDamage
-	forward OnPlayerDamage(playerid, issuerid, &Float:amount, weapon, bodypart);
+#if defined OnPlayerDamageReceive
+	forward OnPlayerDamageReceive(playerid, issuerid, &Float:amount, weapon, bodypart);
 #endif
 
 
@@ -38,11 +38,11 @@ forward Float:GetPlayerWeaponDamage(playerid, weaponid);
 
 
 
-/* ————————————————————————————————————————————————————————————————
+/* â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”
 
 DATA
 
-———————————————————————————————————————————————————————————————— */	
+â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€” */	
 
 
 enum E_DEATH_DATA 
@@ -62,11 +62,11 @@ static
 	Float:DP_PlayerHealth[MAX_PLAYERS];
 
 
-/* ————————————————————————————————————————————————————————————————
+/* â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”
 
 FUNCTIONS
 
-———————————————————————————————————————————————————————————————— */	
+â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€” */	
 
 
 // by Slice
@@ -527,8 +527,8 @@ hook OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
 
 	if (team_playerid != NO_TEAM && team_damagedid != NO_TEAM && team_playerid == team_damagedid) 
 	{
-	    #if defined OnPlayerDamage
-			if(!OnPlayerDamage(damagedid, playerid, amount, weaponid, bodypart))
+	    #if defined OnPlayerDamageReceive
+			if(!OnPlayerDamageReceive(damagedid, playerid, amount, weaponid, bodypart))
 				return 1;
 		#endif
 
@@ -550,8 +550,8 @@ hook OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
 				KillTimer(DP_KnifeTimer[playerid]);
 
 
-			#if defined OnPlayerDamage
-				if(!OnPlayerDamage(damagedid, playerid, amount, weaponid, bodypart))
+			#if defined OnPlayerDamageReceive
+				if(!OnPlayerDamageReceive(damagedid, playerid, amount, weaponid, bodypart))
 					return 1;
 			#endif
 
@@ -564,8 +564,8 @@ hook OnPlayerGiveDamage(playerid, damagedid, Float:amount, weaponid, bodypart)
 		return 1;
 
 
-	#if defined OnPlayerDamage
-		if (OnPlayerDamage(damagedid, playerid, amount, weaponid, bodypart) == 0)
+	#if defined OnPlayerDamageReceive
+		if (OnPlayerDamageReceive(damagedid, playerid, amount, weaponid, bodypart) == 0)
 		    return 0;
 	#endif
 
@@ -790,11 +790,11 @@ static DP_IsPlayerSpawned(playerid)
 }
 
 
-/* ————————————————————————————————————————————————————————————————
+/* â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”
 
 HOOKS
 
-———————————————————————————————————————————————————————————————— */	
+â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€” */	
 
 
 #if defined _ALS_SetPlayerHealth
